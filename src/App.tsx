@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { FC, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchStockData } from './Store/Thunks';
+import * as selectors from './Store/Selectors';
 
-function App() {
+const App: FC = () =>  {
+  const dispatch = useDispatch();
+  const stockData = useSelector(selectors.stockData);
+
+  useEffect(() => {
+    dispatch(fetchStockData());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,11 +26,13 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          <pre>
+            {JSON.stringify(stockData, undefined, 2)}
+          </pre>
         </a>
       </header>
     </div>
   );
-}
+};
 
 export default App;

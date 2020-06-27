@@ -1,0 +1,16 @@
+{
+  "extends": ["react-app"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "semi": "off",
+    "@typescript-eslint/semi": ["error"],
+    "no-multiple-empty-lines": ["error", { "max": 1 }]
+  },
+  "plugins": ["@typescript-eslint", "react-hooks"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  }
+}
