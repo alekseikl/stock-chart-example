@@ -41,29 +41,29 @@ it('Should handle focus/change/blur events', () => {
 });
 
 it('Should handle key events', async () => {
-  const onEditingFinished = jest.fn();
-
   render(
     <ValueCell 
       stock="NASDAQ" 
       index={1} 
       value={2.5} 
-      onEditingFinished={onEditingFinished} 
+      onEditingFinished={jest.fn()} 
       onEditingStarted={jest.fn()} 
     />
   );
 
   const input = screen.getByRole('textbox');
+  const onBlurCall = jest.spyOn(input, 'blur');
 
   fireEvent.focus(input);
   fireEvent.change(input, { target: { value: '3.4' } });
   fireEvent.keyDown(input, { key: 'Enter' });
-  expect(onEditingFinished).toBeCalled();
+  expect(input).toHaveValue('3.4');
+  expect(onBlurCall).toBeCalled();
 
-  onEditingFinished.mockClear();
+  onBlurCall.mockClear();
   fireEvent.focus(input);
   fireEvent.change(input, { target: { value: '3.4' } });
   fireEvent.keyDown(input, { key: 'Escape' });
-
-  expect(onEditingFinished).not.toBeCalled();
+  expect(input).toHaveValue('2.50');
+  expect(onBlurCall).toBeCalled();
 });

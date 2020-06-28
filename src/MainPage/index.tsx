@@ -17,14 +17,12 @@ const MainPage: FC = () => {
   const failedToLoad = useSelector(selectors.failedToLoad);
 
   useEffect(() => {
-    dispatch(fetchStockData());
-  }, [dispatch]);
-
-  useEffect(() => {
     if (!updatesEnabled) {
       dispatch(cancelStockDataFetch());
       return;
     }
+
+    dispatch(fetchStockData());
 
     const intervalId = setInterval(() => {
       dispatch(fetchStockData());
@@ -53,7 +51,7 @@ const MainPage: FC = () => {
         <ChartContainer>
           {resizeListener}
           {sizes.width > 0 && (
-            <Chart width={sizes.width} height={300} data={stockData} colors={StockColors} />
+            <Chart width={sizes.width} height={330} data={stockData} colors={StockColors} />
           )}
         </ChartContainer>
         <Editor data={stockData} onEditingStarted={handleEditingStart} onEditingFinished={handleEditingFinish} />

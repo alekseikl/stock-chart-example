@@ -20,16 +20,10 @@ const ValueCell: FC<Props> = ({ stock, index, value, onEditingStarted, onEditing
     onEditingStarted();
   }, [onEditingStarted]);
 
-  const submitValue = useCallback(() => {
-    if (editedValue) {
-      onEditingFinished(stock, index, parseFloat(editedValue ?? ''));
-      setEditedValue(null);
-    }
-  }, [editedValue, index, onEditingFinished, stock]);
-
   const handleBlur = useCallback(() => {
-    submitValue();
-  }, [submitValue]);
+    onEditingFinished(stock, index, parseFloat(editedValue ?? ''));
+      setEditedValue(null);
+  }, [editedValue, index, onEditingFinished, stock]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -37,11 +31,10 @@ const ValueCell: FC<Props> = ({ stock, index, value, onEditingStarted, onEditing
         setEditedValue(null);
         e.currentTarget.blur();
       } else if (e.key === 'Enter') {
-        submitValue();
         e.currentTarget.blur();
       }
     },
-    [submitValue]
+    []
   );
 
   return (

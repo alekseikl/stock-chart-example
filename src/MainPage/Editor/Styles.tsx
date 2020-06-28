@@ -36,13 +36,16 @@ export const Cell = styled.div`
 export const ValueInput = styled.input.attrs({
   type: 'text'
 })`
+  font-size: 12px;
+  font-family: sans-serif;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   outline: none;
   border: none;
   background-color: transparent;
   text-align: right;
-  padding: 0 4px 0 0;
+  padding: 0 4px;
   z-index: 1;
 
   :focus {
