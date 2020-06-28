@@ -6,17 +6,13 @@ import { Container } from './Styles';
 import YAxis from './YAxis';
 import XAxis from './XAxis';
 import Legend from './Legend';
+import { extractStockArrays, StockValue } from '../utils';
 
 interface Props {
   width: number;
   height: number;
   data: StocksValue[];
   colors: { [key: string]: string };
-}
-
-interface Point {
-  index: number;
-  value: number;
 }
 
 const XAxisHeight = 20;
@@ -72,25 +68,11 @@ const Chart: FC<Props> = ({ width: svgWidth, height: svgHeight, data, colors }) 
       return [];
     }
 
-    const lineByStock: { [key: string]: Point[] } = {};
-
-    data.forEach(item => {
-      Object.entries(item.stocks).forEach(([key, value]) => {
-        const point: Point = {
-          value,
-          index: item.index,
-        };
-        if (lineByStock[key]) {
-          lineByStock[key].push(point);
-        } else {
-          lineByStock[key] = [point];
-        }
-      });
-    });
+    const lineByStock = extractStockArrays(data);
 
     return Object.entries(lineByStock).map(([key, lineData]) => ({
       stock: key,
-      path: d3Line<Point>()
+      path: d3Line<StockValue>()
         .x(d => Math.round(xScale(d.index) ?? 0))
         .y(d => Math.round(height - yScale(d.value)))
         .curve(curveLinear)(lineData) ?? ''

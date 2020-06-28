@@ -5,7 +5,9 @@ export const StockColors = {
   CAC40: '#5690BF'
 };
 
-export const Container = styled.div`
+export const Container = styled.div.attrs({
+  'data-testid': 'main-page'
+})`
   padding: 48px;
   min-width: 900px;
   font-family: sans-serif;

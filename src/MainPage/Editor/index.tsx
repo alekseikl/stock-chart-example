@@ -2,6 +2,7 @@ import React, { FC, memo, useMemo } from 'react';
 import { StocksValue } from '../../Models';
 import { Container, ValuesRow, NameCell } from './Styles';
 import ValueCell from './ValueCell';
+import { extractStockArrays } from '../utils';
 
 interface Props {
   data: StocksValue[];
@@ -9,31 +10,8 @@ interface Props {
   onEditingFinished: (stock: string, index: number, value: number) => void;
 }
 
-interface ValueData {
-  index: number;
-  value: number;
-}
-
 const Editor: FC<Props> = ({ data, onEditingStarted, onEditingFinished }) => {
-  const values = useMemo(() => {
-    const byStock: { [key: string]: ValueData[] } = {};
-
-    data.forEach(item => {
-      Object.entries(item.stocks).forEach(([key, value]) => {
-        const valueData: ValueData = {
-          value,
-          index: item.index,
-        };
-        if (byStock[key]) {
-          byStock[key].push(valueData);
-        } else {
-          byStock[key] = [valueData];
-        }
-      });
-    });
-
-    return byStock;
-  }, [data]);
+  const values = useMemo(() => extractStockArrays(data), [data]);
 
   return (
     <Container>
