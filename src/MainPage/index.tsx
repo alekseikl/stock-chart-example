@@ -28,7 +28,7 @@ const MainPage: FC = () => {
 
     const timeoutId = setTimeout(() => {
       dispatch(fetchStockData());
-    }, 10);
+    }, 50);
 
     const intervalId = setInterval(() => {
       dispatch(fetchStockData());
