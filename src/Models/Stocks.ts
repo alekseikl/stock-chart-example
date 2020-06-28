@@ -1,10 +1,7 @@
 export interface StocksValue {
   index: number
   timestamp: number
-  stocks: {
-    NASDAQ: number
-    CAC40: number
-  }
+  stocks: { [key: string]: number }
 }
 
 export type StockType = 'NASDAQ' | 'CAC40';

@@ -1,9 +1,9 @@
 import React, { FC, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchStockData } from './Store/Thunks';
 import * as selectors from './Store/Selectors';
+import Chart from './UI/Chart';
 
 const App: FC = () =>  {
   const dispatch = useDispatch();
@@ -13,24 +13,16 @@ const App: FC = () =>  {
     dispatch(fetchStockData());
   }, [dispatch]);
 
+  const colors = {
+    NASDAQ: '#DA7E49',
+    CAC40: '#5690BF'
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <pre>
-            {JSON.stringify(stockData, undefined, 2)}
-          </pre>
-        </a>
-      </header>
+    <div>
+      {stockData.length && (
+        <Chart width={900} height={300} data={stockData} colors={colors} />
+      )}
     </div>
   );
 };

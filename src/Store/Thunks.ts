@@ -8,6 +8,8 @@ const Api = axios.create({
   baseURL: 'http://127.0.0.1:8000'
 });
 
+const DataLength = 20;
+
 export const fetchStockData = () => async (
   dispatch: Dispatch,
   getState: () => RootState
@@ -25,9 +27,9 @@ export const fetchStockData = () => async (
 
   try {
     const response = await Api.get<StocksValue[]>('/', {
-      params: { count: 20 }
+      params: { count: DataLength }
     });
-    dispatch(actions.loadStockData.success(response.data));
+    dispatch(actions.loadStockData.success(response.data.slice(0, DataLength)));
   } catch (error) {
     dispatch(actions.loadStockData.failure(axios.isCancel(error)));
   }
