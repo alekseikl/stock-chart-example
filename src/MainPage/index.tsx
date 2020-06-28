@@ -17,18 +17,25 @@ const MainPage: FC = () => {
   const failedToLoad = useSelector(selectors.failedToLoad);
 
   useEffect(() => {
+    dispatch(fetchStockData());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (!updatesEnabled) {
       dispatch(cancelStockDataFetch());
       return;
     }
 
-    dispatch(fetchStockData());
+    const timeoutId = setTimeout(() => {
+      dispatch(fetchStockData());
+    }, 10);
 
     const intervalId = setInterval(() => {
       dispatch(fetchStockData());
     }, 1000);
 
     return () => {
+      clearTimeout(timeoutId);
       clearInterval(intervalId);
     };
   }, [dispatch, updatesEnabled]);
