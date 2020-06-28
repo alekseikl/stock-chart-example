@@ -1,10 +1,9 @@
 /// <reference types="react-scripts" />
-import { ActionType } from 'typesafe-actions';
 
-export type RootAction = ActionType<typeof import('./Store/Actions')>;
+declare module 'react-resize-aware' {
+  import { ReactNode } from 'react';
 
-declare module 'typesafe-actions' {
-  interface Types {
-    RootAction: RootAction;
-  }
+  type ReturnType = [ReactNode, { width: number, height: number }];
+
+  export default function (): ReturnType;
 }

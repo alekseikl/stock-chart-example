@@ -6,8 +6,6 @@ export const Container = styled.div`
   font-size: 12px;
   font-weight: 600;
   font-family: sans-serif;
-
-  margin: 24px;
   border: solid 1px #DEDEDE;
 `;
 

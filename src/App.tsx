@@ -1,30 +1,14 @@
-import React, { FC, useEffect } from 'react';
-import './App.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchStockData } from './Store/Thunks';
-import * as selectors from './Store/Selectors';
-import Chart from './UI/Chart';
+import React, { FC } from 'react';
+import { Provider } from 'react-redux';
+import store from './Store';
+import MainPage from './MainPage';
+import { GlobalStyle } from './GlobalStyle';
 
-const App: FC = () =>  {
-  const dispatch = useDispatch();
-  const stockData = useSelector(selectors.stockData);
-
-  useEffect(() => {
-    dispatch(fetchStockData());
-  }, [dispatch]);
-
-  const colors = {
-    NASDAQ: '#DA7E49',
-    CAC40: '#5690BF'
-  };
-
-  return (
-    <div>
-      {stockData.length && (
-        <Chart width={900} height={300} data={stockData} colors={colors} />
-      )}
-    </div>
-  );
-};
+const App: FC = () =>  (
+  <Provider store={store}>
+    <GlobalStyle />
+    <MainPage />
+  </Provider>
+);
 
 export default App;
