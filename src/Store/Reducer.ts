@@ -35,10 +35,10 @@ export default createReducer(defaultState)
     canceler: null,
     failedToLoad: !payload // Set failed if request wasn't cancelled
   }))
-  .handleAction(actions.setStockValue, (state, { payload: { type, index, value } }) => ({
+  .handleAction(actions.setStockValue, (state, { payload: { stock, index, value } }) => ({
     ...state,
     updatedValues: {
       ...state.updatedValues,
-      [`${type}-${index}`]: value
+      [`${stock}-${index}`]: value
     }
   }));

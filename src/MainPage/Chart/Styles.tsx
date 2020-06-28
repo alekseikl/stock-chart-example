@@ -5,7 +5,6 @@ export const Container = styled.div`
   color: #5e5e5e;
   font-size: 12px;
   font-weight: 600;
-  font-family: sans-serif;
   border: solid 1px #DEDEDE;
 `;
 

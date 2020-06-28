@@ -1,6 +1,6 @@
 import { createAsyncAction, createAction } from 'typesafe-actions';
 import { Canceler } from './Types';
-import { StocksValue, StockType } from '../Models';
+import { StocksValue } from '../Models';
 
 export const loadStockData = createAsyncAction(
   'load-stock-data-request',
@@ -9,7 +9,7 @@ export const loadStockData = createAsyncAction(
 )<Canceler, StocksValue[], boolean>();
 
 export const setStockValue = createAction('set-stock-value')<{ 
-  type: StockType;
+  stock: string;
   index: number;
   value: number;
 }>();

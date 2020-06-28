@@ -8,6 +8,7 @@ export const StockColors = {
 export const Container = styled.div`
   padding: 48px;
   min-width: 900px;
+  font-family: sans-serif;
 `;
 
 export const ChartContainer = styled.div`
