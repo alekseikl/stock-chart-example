@@ -37,10 +37,10 @@ const MainPage: FC = () => {
     setUpdatesEnabled(false);
   }, []);
 
-  const handleEditingFinish = useCallback((stock: string, index: number, value: number) => {
+  const handleEditingFinish = useCallback((stock: string, index: number, value: number | null) => {
     setUpdatesEnabled(true);
 
-    if (!isNaN(value)) {
+    if (value !== null && !isNaN(value)) {
       dispatch(actions.setStockValue({ index, value, stock }));
     }
   }, [dispatch]);

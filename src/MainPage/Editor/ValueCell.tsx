@@ -6,7 +6,7 @@ interface Props {
   index: number;
   value: number;
   onEditingStarted: () => void;
-  onEditingFinished: (stock: string, index: number, value: number) => void;
+  onEditingFinished: (stock: string, index: number, value: number | null) => void;
 }
 
 const ValueCell: FC<Props> = ({ stock, index, value, onEditingStarted, onEditingFinished }) => {
@@ -21,8 +21,8 @@ const ValueCell: FC<Props> = ({ stock, index, value, onEditingStarted, onEditing
   }, [onEditingStarted]);
 
   const handleBlur = useCallback(() => {
-    onEditingFinished(stock, index, parseFloat(editedValue ?? ''));
-      setEditedValue(null);
+    onEditingFinished(stock, index, editedValue !== null ? parseFloat(editedValue) : null);
+    setEditedValue(null);
   }, [editedValue, index, onEditingFinished, stock]);
 
   const handleKeyDown = useCallback(

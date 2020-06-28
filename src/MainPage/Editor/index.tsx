@@ -7,7 +7,7 @@ import { extractStockArrays } from '../utils';
 interface Props {
   data: StocksValue[];
   onEditingStarted: () => void;
-  onEditingFinished: (stock: string, index: number, value: number) => void;
+  onEditingFinished: (stock: string, index: number, value: number | null) => void;
 }
 
 const Editor: FC<Props> = ({ data, onEditingStarted, onEditingFinished }) => {
